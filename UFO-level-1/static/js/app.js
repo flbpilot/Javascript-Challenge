@@ -1,16 +1,15 @@
 // from data.js
 var tableData = data;
 var tbody = d3.select("tbody")
+var clear_button = d3.select("#clear-btn");
 
 tableData.forEach(function(ufo) {
-   // console.log(ufo);
     var row = tbody.append("tr")
     Object.entries(ufo).forEach(([key, value]) => {
         var cell = row.append("td")
         cell.text(value)
-        // Log the key and value
-       // console.log(`Key: ${key} and Value ${value}`);
-      });   
+
+    });   
   });
 var submit =d3.select("#filter-btn")
 submit.on("click",function(){
@@ -21,14 +20,14 @@ submit.on("click",function(){
     console.log(filterrow);
     tbody.html("")
     filterrow.forEach(function(ufo) {
-        // console.log(ufo);
-         var row = tbody.append("tr")
+
+        var row = tbody.append("tr")
          Object.entries(ufo).forEach(([key, value]) => {
              var cell = row.append("td")
              cell.text(value)
-             // Log the key and value
-            // console.log(`Key: ${key} and Value ${value}`);
-           });   
+
+
+            });   
 
 })
 })
