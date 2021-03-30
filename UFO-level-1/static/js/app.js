@@ -1,6 +1,5 @@
 var tableData = data;
 var tbody = d3.select("tbody")
-var clear_button = d3.select("#clear-btn");
 
 tableData.forEach(function(ufo) {
     var row = tbody.append("tr")
