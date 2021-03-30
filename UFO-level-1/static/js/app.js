@@ -14,6 +14,7 @@ tableData.forEach((sighting) => {
     });
   });
 
+  
 clear_button.on("click", runClear);
 date_form.on("submit", runFilterDate);
 
