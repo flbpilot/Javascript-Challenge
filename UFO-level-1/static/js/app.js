@@ -1,32 +1,52 @@
 var tableData = data;
-var tbody = d3.select("tbody")
+var table = d3.select("tbody");
 
-tableData.forEach(function(ufo) {
-    var row = tbody.append("tr")
-    Object.entries(ufo).forEach(([key, value]) => {
-        var cell = row.append("td")
-        cell.text(value)
+function fullTable(data){
+    tableData.forEach((ufo) => {
+        var row = table.append("tr");
+        Object.entries(ufo).forEach(([key, value]) => {
+        var cell = row.append("td").text(value);
+        });
+    });
+}
 
-    });   
-  });
-var submit =d3.select("#filter-btn")
-submit.on("click",function(){
-    var inputid = d3.select("#datetime");
-    var inputvalue = inputid.property("value")
-    console.log (inputvalue)
-    var filterrow = tableData.filter(x => x.datetime === inputvalue)
-    console.log(filterrow);
-    tbody.html("")
-    filterrow.forEach(function(ufo) {
+var filterButton = d3.select("#filter-btn");
+var clearButton = d3.select("#clear-btn")
 
-        var row = tbody.append("tr")
-         Object.entries(ufo).forEach(([key, value]) => {
-             var cell = row.append("td")
-             cell.text(value)
+var form = d3.select("#search-form");
 
 
-            });   
+filterButton.on("click", runFilter);
+clearButton.on("click", runClear)
+form.on("submit",runFilter);
 
-})
-})
+function runFilter(){
 
+    d3.event.preventDefault();
+
+    var dateElement = d3.select("#datetime-input");
+    console.log(dateElement.property("value"))
+    var dateValue = dateElement.property("value");
+    var dateSearch = tableData.filter(tableData => tableData.datetime === dateValue);
+    console.log(dateSearch);
+    table.html("")
+
+
+    dateSearch.forEach((results) => {
+        row = table.append("tr");
+        Object.entries(results).forEach(([key,value]) => {
+        cell = row.append("td").text(value);
+        });
+    
+    });
+
+}
+
+function runClear(){
+    d3.event.preventDefault();
+    table.html("")
+    fullTable(tableData)
+
+}
+
+fullTable(tableData);
